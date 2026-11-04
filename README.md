@@ -89,7 +89,7 @@ To install from outside your LAN, put the addon behind HTTPS (Caddy, nginx, a tu
 
 See [DEPLOY.md](DEPLOY.md) for a no-card Render Blueprint, Google Cloud Run, Oracle Always Free and Cloudflare Workers options. The included [`render.yaml`](render.yaml) deploys the Dockerfile as a free Render web service; once deployed, share `https://<your-service>.onrender.com/manifest.json`.
 
-This repo's live deployment is [streamrank-pgs1.onrender.com](https://streamrank-pgs1.onrender.com/). The Render service is connected to `main`, so pushing a commit redeploys it.
+This repo's live deployment is [streamrank-pgs1.onrender.com](https://streamrank-pgs1.onrender.com/). The Render service builds from `main`; after pushing, trigger a deploy from the Render dashboard (public-Git services do not receive a GitHub webhook).
 
 Free container hosts sleep after inactivity, so the first Stremio request after a quiet period may be slow or time out. Open the public URL once to wake the service, or use the keep-warm note in DEPLOY.md.
 
