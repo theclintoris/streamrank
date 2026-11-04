@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: streamrank
+    runtime: docker
+    plan: free
+    region: oregon
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /healthz
+    autoDeploy: true
+    envVars:
+      - key: PORT
+        value: "10000"
+      - key: REGION
+        value: US
+      - key: CACHE_TTL_MS
+        value: "600000"

@@ -1,0 +1,35 @@
+{
+  "name": "stremio-streamrank",
+  "version": "1.0.0",
+  "description": "A Stremio addon for top movies and shows on Netflix, Hulu, Disney+, Apple TV+, Paramount+, HBO Max and Prime Video, with genre, year, IMDb rating and sort filters.",
+  "type": "module",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node --env-file-if-exists=.env src/server.js",
+    "dev": "node --env-file-if-exists=.env --watch src/server.js",
+    "test": "node --test --test-isolation=none test",
+    "test:watch": "node --test --test-isolation=none --watch test",
+    "smoke": "node scripts/smoke.mjs",
+    "check": "node --check src/server.js && node --check src/justwatch.js && node --check src/manifest.js && node --check src/landing.js && node --check src/filters.js && node --check src/config-token.js && node --check src/mapper.js && node --check src/cache.js && node --check src/config.js && node --check src/url.js",
+    "logo": "python scripts/make-logo.py"
+  },
+  "engines": {
+    "node": ">=20.19"
+  },
+  "keywords": [
+    "stremio",
+    "stremio-addon",
+    "justwatch",
+    "streaming",
+    "netflix",
+    "hulu",
+    "disney",
+    "hbo",
+    "prime-video"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "compression": "^1.8.2",
+    "express": "^4.21.2"
+  }
+}
