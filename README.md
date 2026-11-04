@@ -4,6 +4,8 @@ A Stremio addon for the top movies and shows on **Netflix, Hulu, Disney+, Apple 
 
 StreamRank adds 14 catalog rows (7 services × movies/shows) to Stremio Discover. Each row exposes filter dropdowns that Stremio renders natively, so you can narrow a row without editing any URLs. A small builder page also creates a custom install link with filters baked in.
 
+**Live instance:** [streamrank-pgs1.onrender.com](https://streamrank-pgs1.onrender.com/) — install `https://streamrank-pgs1.onrender.com/manifest.json` in Stremio. The free Render instance sleeps after 15 minutes idle, so the first request may take about a minute to wake.
+
 <p align="center">
   <img src="public/logo.png" width="140" alt="StreamRank icon">
 </p>
@@ -34,10 +36,22 @@ The server listens on `0.0.0.0:7100` by default. The startup banner prints your 
 
 ### Install links
 
-- Default board: `stremio://127.0.0.1:7100/manifest.json`
+- Hosted board (works on any device): `https://streamrank-pgs1.onrender.com/manifest.json`
+- Local board: `stremio://127.0.0.1:7100/manifest.json`
 - Or paste `http://127.0.0.1:7100/manifest.json` into Stremio's addon search/install field.
 
-Stremio on a different device on the same network: use `http://<LAN-IP>:7100/manifest.json` (for example `http://192.168.1.20:7100/manifest.json`).
+Stremio on another **desktop** on the same network can use `http://<LAN-IP>:7100/manifest.json` (for example `http://192.168.1.20:7100/manifest.json`).
+
+### Install on a TV
+
+Stremio clients reject non-localhost **HTTP** addon URLs, so use the hosted HTTPS URL on a TV:
+
+1. Open Stremio on the TV → **Add-ons** → **Add addon**.
+2. Paste `https://streamrank-pgs1.onrender.com/manifest.json`.
+3. Install it, then open **Discover** and pick a row such as **Netflix · Movies**.
+4. Open the funnel icon for `Year`, `Rating` and `sort`; Genre is the dropdown beside the catalog picker.
+
+Android TV and Fire TV generally expose URL-based addon install. Samsung/LG builds are more limited and may not accept a custom URL at all. StreamRank is catalogs/metadata only — the TV still needs a stream addon for playback.
 
 > **Default vs custom board:** the default manifest keeps all filters editable inside Stremio Discover. A custom manifest bakes its filters into the catalogs and exposes only pagination, so it is best when you want a dedicated row such as “Netflix · Shows · Drama · 2015–2024 · 8.0+”.
 
@@ -75,6 +89,8 @@ To install from outside your LAN, put the addon behind HTTPS (Caddy, nginx, a tu
 
 See [DEPLOY.md](DEPLOY.md) for a no-card Render Blueprint, Google Cloud Run, Oracle Always Free and Cloudflare Workers options. The included [`render.yaml`](render.yaml) deploys the Dockerfile as a free Render web service; once deployed, share `https://<your-service>.onrender.com/manifest.json`.
 
+This repo's live deployment is [streamrank-pgs1.onrender.com](https://streamrank-pgs1.onrender.com/). The Render service is connected to `main`, so pushing a commit redeploys it.
+
 Free container hosts sleep after inactivity, so the first Stremio request after a quiet period may be slow or time out. Open the public URL once to wake the service, or use the keep-warm note in DEPLOY.md.
 
 ## Docker
@@ -106,6 +122,7 @@ npm test          # unit tests (no network)
 npm run smoke     # live checks against a running local server
 npm run check     # syntax check entry modules
 npm run logo      # regenerate public/logo.png (Pillow)
+npm run verify:public -- https://streamrank-pgs1.onrender.com  # check a deployed instance
 ```
 
 Project layout:

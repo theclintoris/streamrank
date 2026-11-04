@@ -4,6 +4,8 @@ StreamRank is a single stateless Node/Express container. There is no database, n
 
 The easiest no-card option is **Render** with the included [`render.yaml`](render.yaml). Render builds the Dockerfile and gives you a public `https://…onrender.com` URL.
 
+This repository is currently deployed at **<https://streamrank-pgs1.onrender.com/>**. The manifest URL is `https://streamrank-pgs1.onrender.com/manifest.json`.
+
 ## Option A — Render (recommended, no credit card)
 
 ### 1. Push the project to GitHub
